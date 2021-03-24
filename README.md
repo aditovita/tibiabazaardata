@@ -36,4 +36,30 @@ CREATE TABLE `tibia_auction` (
 `page_html_gzcompressed` MEDIUMBLOB,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+public function getPageHtmlGzcompressed()
+{
+    if($this->pageHtmlGzcompressed !== null)
+    {
+        if(is_string($this->pageHtmlGzcompressed))
+        {
+            return gzuncompress($this->pageHtmlGzcompressed);
+        }
+        $result = @gzuncompress(stream_get_contents($this->pageHtmlGzcompressed));
+        if ($result === false) {
+            $result = @gzuncompress( stream_get_contents($this->pageHtmlGzcompressed, 1, 0 ) . stream_get_contents( $this->pageHtmlGzcompressed, -1, 1 ) );
+            if ($result === false) {
+                var_dump($this->id);
+                exit;
+            }
+        }
+        return $result;
+    }
+    else
+    {
+        return $this->pageHtmlGzcompressed;
+    }
+}
+
 ```
