@@ -1,4 +1,6 @@
 ```
+MySQL tables:
+
 CREATE TABLE `tibia_auction` (
 `id` int(11) NOT NULL,
 `character_name` varchar(255) DEFAULT NULL,
@@ -37,7 +39,13 @@ CREATE TABLE `tibia_auction` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `tibia_auction_cancelled` (
+`id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+Sample PHP Code to get the page compressed html data:
 public function getPageHtmlGzcompressed()
 {
     if($this->pageHtmlGzcompressed !== null)
